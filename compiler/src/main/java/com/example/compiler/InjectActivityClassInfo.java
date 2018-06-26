@@ -44,14 +44,14 @@ public class InjectActivityClassInfo {
         String className = getClassName(mClassElement, packageName);
         ClassName bindingClassName = ClassName.get(packageName, className);
         //生成类名
-        String creatClassName = bindingClassName.simpleName() + "_SUBSCRIBE_INFO";
+        String creatClassName = bindingClassName.simpleName() + "_JumpCenter";
         /**
          * Builder数据内部类
          */
         TypeSpec.Builder builderInnerTypeBuilder = TypeSpec.classBuilder("Builder")
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .addField(FieldSpec.builder(TypeNameUtils.CONTEXT, "context", Modifier.PRIVATE).build())
-                .addField(FieldSpec.builder(TypeName.BOOLEAN, "isDataByIntent", Modifier.PRIVATE).build());
+                .addField(FieldSpec.builder(TypeNameUtils.CONTEXT, "context", Modifier.PRIVATE).build());
+//                .addField(FieldSpec.builder(TypeName.BOOLEAN, "isDataByIntent", Modifier.PRIVATE).build());
         /**
          * Builder构造方法
          */
@@ -121,10 +121,9 @@ public class InjectActivityClassInfo {
                 .addParameter(TypeName.get(mClassElement.asType()), "target", Modifier.FINAL)
                 .addStatement("if (instance == null)" +
                         "\nreturn")
-                .addStatement("if (instance.builder.isDataByIntent)" +
-                        "\ninstance.setValueByIntent(target)")
-                .addStatement("  else" +
-                        "\ninstance.setValueByMemory(target)");
+                .addStatement("instance.setValueByIntent(target)");
+//                .addStatement("  else" +
+//                        "\ninstance.setValueByMemory(target)");
 
         for (int i = 0; i < paramInfos.size(); i++) {
             ParamInfo paramInfo = paramInfos.get(i);
@@ -170,6 +169,9 @@ public class InjectActivityClassInfo {
                     setIntentBuilder.addStatement("intent.putParcelableArrayListExtra($S,builder.$L)", name, name);
                 }
             } else {
+                setIntentBuilder.addStatement("intent.putExtra($S,builder.$L)", name, name);
+                setValueByIntentBuilder.addStatement("target.$L =  ($L)target.getIntent().getSerializableExtra($S)", name,typeName, name);
+
 //                Class nowClass = getTypeClass(typeName.toString());
 //                setIntentBuilder.addStatement("//$L",typeName.toString());
 //                    setIntentBuilder.beginControlFlow("if($T.typeIsisAssignableFromParcelable(builder.$L.getClass(),$T.class))",TypeNameUtils.UTILS,name,TypeNameUtils.PARCELABLE)
@@ -178,8 +180,6 @@ public class InjectActivityClassInfo {
 //                    setIntentBuilder.beginControlFlow("else if($T.typeIsisAssignableFromSerializable(builder.$L.getClass()))",TypeNameUtils.UTILS,name)
 //                            .addStatement("intent.putExtra($S, ($T)builder.$L)",name,Serializable.class,name)
 //                            .endControlFlow();
-
-
             }
 
         }
@@ -198,7 +198,7 @@ public class InjectActivityClassInfo {
                 .addField(FieldSpec.builder(TypeNameUtils.THIS(creatClassName), "instance", Modifier.PRIVATE, Modifier.STATIC).build())
                 //构造方法
                 .addMethod(creatClassConstructor.build())
-                .addMethod(setValueByMemoryBuilder.build())
+//                .addMethod(setValueByMemoryBuilder.build())
                 //跳转方法
                 .addMethod(goBuilder.build())
                 //builder方法生成对象

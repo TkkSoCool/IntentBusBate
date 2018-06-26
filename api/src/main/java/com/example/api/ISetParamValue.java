@@ -15,6 +15,6 @@ public interface ISetParamValue<T> {
     /**
      * 直接传递对象的引用，不需要序列化
      */
-    void setValueByMemory(T target);
+//    void setValueByMemory(T target);
 
 }

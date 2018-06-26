@@ -24,6 +24,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goActivity2(View view) {
-        Main2Activity_SUBSCRIBE_INFO.builder(this).setDoubleBase(1.0).create().go();
+        Main2Activity_SUBSCRIBE_INFO.builder(this).setByteBase((byte) 1.0).create().go();
     }
 }

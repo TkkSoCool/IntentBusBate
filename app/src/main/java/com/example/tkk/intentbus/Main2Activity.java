@@ -20,68 +20,68 @@ public class Main2Activity extends AppCompatActivity {
      */
     @InjectParam
     byte byteBase;
-    @InjectParam
-    short shortBase;
-    @InjectParam
-    int intBase;
-    @InjectParam
-    long longBase;
-    @InjectParam
-    float floatBase;
-    @InjectParam
-    double doubleBase;
-    @InjectParam
-    char charBase;
-    @InjectParam
-    boolean booleanBase;
-    /**
-     * 基本类型数组
-     */
-    @InjectParam
-    byte[] byteArr;
-    @InjectParam
-    short[] shortArr;
-    @InjectParam
-    int[] intArr;
-    @InjectParam
-    long[] longArr;
-    @InjectParam
-    float[] floatArr;
-    @InjectParam
-    double[] doubleArr;
-    @InjectParam
-    char[] charArr;
-    @InjectParam
-    boolean[] booleanArr;
-
-    /**
-     * 四种ArrayList
-     * ArrayList<Integer>
-     * ArrayList<CharSequence>
-     * ArrayList<String>
-     * ArrayList<Parcelable>
-     */
-    @InjectParam
-    ArrayList<Integer> integerArrayList;
-    @InjectParam
-    ArrayList<CharSequence> charSequenceArrayList;
-    @InjectParam
-    ArrayList<String> stringArrayList;
-    @InjectParam
-    ArrayList<Parcelable> parcelableArrayList;
-    @InjectParam
-    HashMap<String,Parcelable> stringParcelableMap;
-    @InjectParam
-    User user;
-    @InjectParam
-    UserParcelable userParcelable;
+//    @InjectParam
+//    short shortBase;
+//    @InjectParam
+//    int intBase;
+//    @InjectParam
+//    long longBase;
+//    @InjectParam
+//    float floatBase;
+//    @InjectParam
+//    double doubleBase;
+//    @InjectParam
+//    char charBase;
+//    @InjectParam
+//    boolean booleanBase;
+//    /**
+//     * 基本类型数组
+//     */
+//    @InjectParam
+//    byte[] byteArr;
+//    @InjectParam
+//    short[] shortArr;
+//    @InjectParam
+//    int[] intArr;
+//    @InjectParam
+//    long[] longArr;
+//    @InjectParam
+//    float[] floatArr;
+//    @InjectParam
+//    double[] doubleArr;
+//    @InjectParam
+//    char[] charArr;
+//    @InjectParam
+//    boolean[] booleanArr;
+//
+//    /**
+//     * 四种ArrayList
+//     * ArrayList<Integer>
+//     * ArrayList<CharSequence>
+//     * ArrayList<String>
+//     * ArrayList<Parcelable>
+//     */
+//    @InjectParam
+//    ArrayList<Integer> integerArrayList;
+//    @InjectParam
+//    ArrayList<CharSequence> charSequenceArrayList;
+//    @InjectParam
+//    ArrayList<String> stringArrayList;
+//    @InjectParam
+//    ArrayList<Parcelable> parcelableArrayList;
+//    @InjectParam
+//    HashMap<String,Parcelable> stringParcelableMap;
+//    @InjectParam
+//    User user;
+//    @InjectParam
+//    UserParcelable userParcelable;
     @InjectParam
     UserSerializable userSerializable;
 
-    @InjectParam
-    User[] userArr;
-    @InjectParam
-    UserParcelable[] userParcelableArr;
+//    @InjectParam
+//    User[] userArr;
+//    @InjectParam
+//    UserParcelable[] userParcelableArr;
     @InjectParam
     UserSerializable[] userSerializableArr;
 
