@@ -44,7 +44,7 @@ public class InjectActivityClassInfo {
         String className = getClassName(mClassElement, packageName);
         ClassName bindingClassName = ClassName.get(packageName, className);
         //生成类名
-        String creatClassName = bindingClassName.simpleName() + "_JumpCenter";
+        String creatClassName = bindingClassName.simpleName() + "__JumpCenter";
         /**
          * Builder数据内部类
          */
