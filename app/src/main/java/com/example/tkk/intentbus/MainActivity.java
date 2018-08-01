@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.example.api.InjectActivity;
 import com.example.api.InjectParam;
+import com.example.tkk.intentbus.SaveInstanceState.AActivity__JumpCenter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,10 +21,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        findViewById(R.id.bt_to_a).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AActivity__JumpCenter.builder(MainActivity.this).setId(1).create().go();
+            }
+        });
     }
 
     public void goActivity2(View view) {
-        Main2Activity_SUBSCRIBE_INFO.builder(this).setByteBase((byte) 1.0).create().go();
+        Main2Activity__JumpCenter.builder(this).create().go();
     }
 }

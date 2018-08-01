@@ -155,6 +155,7 @@ public class InjectActivityClassInfo {
             } else if (typeName instanceof ParameterizedTypeName && TypeNameUtils.ARRAYLIST.equals(((ParameterizedTypeName) typeName).rawType)) {
                 ParameterizedTypeName parameterizedTypeName = (ParameterizedTypeName) typeName;
                 TypeName paraTypeName = parameterizedTypeName.typeArguments.get(0);
+
                 if (paraTypeName.toString().equals(TypeNameUtils.INTEGER.toString())) {
                     setValueByIntentBuilder.addStatement("target.$L =  target.getIntent().getIntegerArrayListExtra($S)", name, name);
                     setIntentBuilder.addStatement("intent.putIntegerArrayListExtra($S,builder.$L)", name, name);
@@ -164,7 +165,7 @@ public class InjectActivityClassInfo {
                 } else if (paraTypeName.toString().equals(TypeNameUtils.CHAR_SEQUENCE.toString())) {
                     setValueByIntentBuilder.addStatement("target.$L =  target.getIntent().getCharSequenceArrayListExtra($S)", name, name);
                     setIntentBuilder.addStatement("intent.putCharSequenceArrayListExtra($S,builder.$L)", name, name);
-                } else if (paraTypeName.toString().equals(TypeNameUtils.PARCELABLE.toString())) {
+                } else  {
                     setValueByIntentBuilder.addStatement("target.$L =  target.getIntent().getParcelableArrayListExtra($S)", name, name);
                     setIntentBuilder.addStatement("intent.putParcelableArrayListExtra($S,builder.$L)", name, name);
                 }

@@ -67,8 +67,8 @@ public class Main2Activity extends AppCompatActivity {
 //    ArrayList<CharSequence> charSequenceArrayList;
 //    @InjectParam
 //    ArrayList<String> stringArrayList;
-//    @InjectParam
-//    ArrayList<Parcelable> parcelableArrayList;
+    @InjectParam
+    ArrayList<UserParcelable> parcelableArrayList;
 //    @InjectParam
 //    HashMap<String,Parcelable> stringParcelableMap;
 //    @InjectParam
@@ -92,7 +92,7 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Main2Activity_SUBSCRIBE_INFO.bind(this);
+        Main2Activity__JumpCenter.bind(this);
     }
 
     private boolean typeIsisAssignableFromSerializable(String className) {
