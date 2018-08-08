@@ -121,7 +121,10 @@ public class InjectActivityClassInfo {
                 .addParameter(TypeName.get(mClassElement.asType()), "target", Modifier.FINAL)
                 .addStatement("if (instance == null)" +
                         "\nreturn")
-                .addStatement("instance.setValueByIntent(target)");
+                .addStatement("instance.setValueByIntent(target)")
+                        .addStatement("instance.mContent = null")
+                .addStatement("instance.builder = null");
+
 //                .addStatement("  else" +
 //                        "\ninstance.setValueByMemory(target)");
 
