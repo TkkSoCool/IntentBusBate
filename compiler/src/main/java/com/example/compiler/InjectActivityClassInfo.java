@@ -123,7 +123,13 @@ public class InjectActivityClassInfo {
                         "\nreturn")
                 .addStatement("instance.setValueByIntent(target)")
                         .addStatement("instance.mContent = null")
-                .addStatement("instance.builder = null");
+                .addStatement("instance.builder.context = null")
+
+
+
+                .addStatement("instance.builder = null")
+                        .addStatement("instance = null");
+
 
 //                .addStatement("  else" +
 //                        "\ninstance.setValueByMemory(target)");
