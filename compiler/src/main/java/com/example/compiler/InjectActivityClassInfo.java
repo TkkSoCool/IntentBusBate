@@ -22,6 +22,7 @@ import javax.lang.model.util.Elements;
 
 /**
  * Created  on 2018/4/13
+ *
  * @author 唐开阔
  * @describe 生成类信息
  * 问题1：不能再注解处理区判断数据class是否序列化
@@ -122,13 +123,12 @@ public class InjectActivityClassInfo {
                 .addStatement("if (instance == null)" +
                         "\nreturn")
                 .addStatement("instance.setValueByIntent(target)")
-                        .addStatement("instance.mContent = null")
+                .addStatement("instance.mContent = null")
                 .addStatement("instance.builder.context = null")
 
 
-
                 .addStatement("instance.builder = null")
-                        .addStatement("instance = null");
+                .addStatement("instance = null");
 
 
 //                .addStatement("  else" +
@@ -174,22 +174,31 @@ public class InjectActivityClassInfo {
                 } else if (paraTypeName.toString().equals(TypeNameUtils.CHAR_SEQUENCE.toString())) {
                     setValueByIntentBuilder.addStatement("target.$L =  target.getIntent().getCharSequenceArrayListExtra($S)", name, name);
                     setIntentBuilder.addStatement("intent.putCharSequenceArrayListExtra($S,builder.$L)", name, name);
-                } else  {
+                } else {
                     setValueByIntentBuilder.addStatement("target.$L =  target.getIntent().getParcelableArrayListExtra($S)", name, name);
                     setIntentBuilder.addStatement("intent.putParcelableArrayListExtra($S,builder.$L)", name, name);
                 }
-            } else {
+            }else if (typeName.toString().equals(TypeNameUtils.STRING.toString())){
+                String getIntExtraName = getOneUppercaseStr(typeName.toString());
+                setValueByIntentBuilder.addStatement("target.$L =  target.getIntent().getStringExtra($S)", name, name);
                 setIntentBuilder.addStatement("intent.putExtra($S,builder.$L)", name, name);
-                setValueByIntentBuilder.addStatement("target.$L =  ($L)target.getIntent().getParcelableExtra($S)", name,typeName, name);
+            }
+            else {
+                setValueByIntentBuilder.beginControlFlow("if($T.typeIsisAssignableFromParcelable(builder.$L.getClass(),$T.class))", TypeNameUtils.UTILS, name, TypeNameUtils.PARCELABLE)
+                        .addStatement("target.$L =  ($L)target.getIntent().getParcelableExtra($S)", name, typeName, name)
+                        .endControlFlow();
+                setValueByIntentBuilder.beginControlFlow("else if($T.typeIsisAssignableFromSerializable(builder.$L.getClass()))", TypeNameUtils.UTILS, name)
+                        .addStatement("target.$L =  ($L)target.getIntent().getSerializableExtra($S)", name, typeName, name)
+                        .endControlFlow();
 
-//                Class nowClass = getTypeClass(typeName.toString());
-//                setIntentBuilder.addStatement("//$L",typeName.toString());
-//                    setIntentBuilder.beginControlFlow("if($T.typeIsisAssignableFromParcelable(builder.$L.getClass(),$T.class))",TypeNameUtils.UTILS,name,TypeNameUtils.PARCELABLE)
-//                            .addStatement("intent.putExtra($S, ($T)builder.$L)",name,TypeNameUtils.PARCELABLE,name)
-//                            .endControlFlow();
-//                    setIntentBuilder.beginControlFlow("else if($T.typeIsisAssignableFromSerializable(builder.$L.getClass()))",TypeNameUtils.UTILS,name)
-//                            .addStatement("intent.putExtra($S, ($T)builder.$L)",name,Serializable.class,name)
-//                            .endControlFlow();
+
+//                setIntentBuilder.beginControlFlow("if($T.typeIsisAssignableFromParcelable(builder.$L.getClass(),$T.class))", TypeNameUtils.UTILS, name, TypeNameUtils.PARCELABLE)
+//                        .addStatement("intent.putExtra($S, ($T)builder.$L)", name, TypeNameUtils.PARCELABLE, name)
+//                        .endControlFlow();
+//                setIntentBuilder.beginControlFlow("else if($T.typeIsisAssignableFromSerializable(builder.$L.getClass()))", TypeNameUtils.UTILS, name)
+//                        .addStatement("intent.putExtra($S, ($T)builder.$L)", name, Serializable.class, name)
+//                        .endControlFlow();
+                setIntentBuilder.addStatement("intent.putExtra($S,builder.$L)", name, name);
             }
 
         }
@@ -269,7 +278,7 @@ public class InjectActivityClassInfo {
         return str;
     }
 
-    private Class getTypeClass(String strName){
+    private Class getTypeClass(String strName) {
         Class clz = null;
         try {
             clz = Class.forName(strName);
