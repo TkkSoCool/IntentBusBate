@@ -180,7 +180,7 @@ public class InjectActivityClassInfo {
                 }
             } else {
                 setIntentBuilder.addStatement("intent.putExtra($S,builder.$L)", name, name);
-                setValueByIntentBuilder.addStatement("target.$L =  ($L)target.getIntent().getSerializableExtra($S)", name,typeName, name);
+                setValueByIntentBuilder.addStatement("target.$L =  ($L)target.getIntent().getParcelableExtra($S)", name,typeName, name);
 
 //                Class nowClass = getTypeClass(typeName.toString());
 //                setIntentBuilder.addStatement("//$L",typeName.toString());

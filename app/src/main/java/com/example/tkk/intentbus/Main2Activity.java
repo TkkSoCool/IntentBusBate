@@ -18,8 +18,8 @@ public class Main2Activity extends AppCompatActivity {
     /**
      * 八种基本数据类型
      */
-    @InjectParam
-    byte byteBase;
+//    @InjectParam
+//    byte byteBase;
 //    @InjectParam
 //    short shortBase;
 //    @InjectParam
@@ -67,8 +67,8 @@ public class Main2Activity extends AppCompatActivity {
 //    ArrayList<CharSequence> charSequenceArrayList;
 //    @InjectParam
 //    ArrayList<String> stringArrayList;
-    @InjectParam
-    ArrayList<UserParcelable> parcelableArrayList;
+//    @InjectParam
+//    ArrayList<UserParcelable> parcelableArrayList;
 //    @InjectParam
 //    HashMap<String,Parcelable> stringParcelableMap;
 //    @InjectParam
@@ -76,14 +76,14 @@ public class Main2Activity extends AppCompatActivity {
 //    @InjectParam
 //    UserParcelable userParcelable;
     @InjectParam
-    UserSerializable userSerializable;
+    UserParcelable userSerializable;
 
 //    @InjectParam
 //    User[] userArr;
 //    @InjectParam
 //    UserParcelable[] userParcelableArr;
-    @InjectParam
-    UserSerializable[] userSerializableArr;
+//    @InjectParam
+//    UserSerializable[] userSerializableArr;
 
     /**
      * 特殊类型
